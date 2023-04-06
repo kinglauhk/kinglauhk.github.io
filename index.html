@@ -3,49 +3,32 @@
 <head>
 	<title>最強贏馬號碼</title>
 	<style>
-		#result {
-			font-size: 30px;
-		}
-		#generate {
-			font-size: 100px;
+		button {
+			width: 100px;
 		}
 	</style>
-	<script>
-		function generateNumbers() {
-			var numbers = [];
-			var result = "";
-			for (var i = 1; i <= 9; i++) {
-				numbers.push([i, [], []]);
-			}
-			for (var i = 1; i <= 3; i++) {
-				for (var j = 0; j < 9; j++) {
-					var num = Math.floor(Math.random() * 12) + 1;
-					if (numbers[j][1].indexOf(num) == -1 && numbers[j][2].indexOf(num) == -1) {
-						numbers[j][1].push(num);
-						if (numbers[j][1].length == 3) {
-							numbers[j][2] = numbers[j][1].slice(0);
-						}
-					} else {
-						j--;
-					}
-				}
-			}
-			for (var i = 0; i < numbers.length; i++) {
-				var line = "第" + numbers[i][0] + "場: ";
-				for (var j = 0; j < numbers[i][2].length; j++) {
-					line += numbers[i][2][j];
-					if (j < numbers[i][2].length - 1) {
-						line += ",";
-					}
-				}
-				result += line + "<br>";
-			}
-			document.getElementById("result").innerHTML = result;
-		}
-	</script>
 </head>
 <body>
-	<button id="generate" onclick="generateNumbers()">必贏號碼</button>
+	<h1>最強贏馬號碼</h1>
+	<button onclick="generateNumbers()">必贏號碼</button>
 	<div id="result"></div>
+
+	<script>
+		function generateNumbers() {
+			var resultDiv = document.getElementById("result");
+			resultDiv.innerHTML = "";
+
+			for (var i = 1; i <= 9; i++) {
+				var numbers = [];
+				while (numbers.length < 3) {
+					var randomNum = Math.floor(Math.random() * 12) + 1;
+					if (numbers.indexOf(randomNum) === -1) {
+						numbers.push(randomNum);
+					}
+				}
+				resultDiv.innerHTML += "第" + i + "場: " + numbers[0] + "," + numbers[1] + "," + numbers[2] + "<br>";
+			}
+		}
+	</script>
 </body>
 </html>
