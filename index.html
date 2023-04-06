@@ -1,24 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Random Number Generator</title>
     <meta charset="UTF-8">
+    <title>Random Numbers</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        margin: auto;
+      }
+      td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
-    <h1>Random Number Generator</h1>
-    <button onclick="generateNumbers()">Generate Numbers</button>
-    <div id="result"></div>
+    <table>
+      <tbody id="numbers-table">
+      </tbody>
+    </table>
     <script>
-      function generateNumbers() {
+      function getRandomNumbers() {
         var numbers = [];
-        while (numbers.length < 6) {
-          var number = Math.floor(Math.random() * 49) + 1;
-          if (!numbers.includes(number)) {
-            numbers.push(number);
+        while (numbers.length < 3) {
+          var n = Math.floor(Math.random() * 12) + 1;
+          if (numbers.indexOf(n) == -1) {
+            numbers.push(n);
           }
         }
-        document.getElementById("result").innerHTML = "Random Numbers: " + numbers.join(", ");
+        return numbers;
       }
+
+      function generateNumbersTable() {
+        var table = document.getElementById("numbers-table");
+        for (var i = 1; i <= 9; i++) {
+          var row = document.createElement("tr");
+          for (var j = 0; j < 3; j++) {
+            var cell = document.createElement("td");
+            var numbers = getRandomNumbers();
+            cell.textContent = numbers.join(", ");
+            row.appendChild(cell);
+          }
+          table.appendChild(row);
+        }
+      }
+
+      window.onload = generateNumbersTable;
     </script>
   </body>
 </html>
