@@ -1,46 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>隨機數字產生器</title>
-    <script>
-      function generateNumbers() {
-        var numbers = [];
-        var rows = 9;
-        var maxNumber = 12;
-        
-        // 生成數字陣列
-        for (var i = 1; i <= maxNumber; i++) {
-          numbers.push(i);
-        }
-        
-        // 每一行隨機選擇3個數字
-        for (var i = 0; i < rows; i++) {
-          var rowNumbers = [];
-          for (var j = 0; j < 3; j++) {
-            var index = Math.floor(Math.random() * numbers.length);
-            var number = numbers[index];
-            rowNumbers.push(number);
-            numbers.splice(index, 1);
-          }
-          document.getElementById("row" + (i + 1)).innerHTML = rowNumbers.join(", ");
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <h1>隨機數字產生器</h1>
-    <button onclick="generateNumbers()">產生數字</button>
-    <table>
-      <tr><td id="row1"></td></tr>
-      <tr><td id="row2"></td></tr>
-      <tr><td id="row3"></td></tr>
-      <tr><td id="row4"></td></tr>
-      <tr><td id="row5"></td></tr>
-      <tr><td id="row6"></td></tr>
-      <tr><td id="row7"></td></tr>
-      <tr><td id="row8"></td></tr>
-      <tr><td id="row9"></td></tr>
-    </table>
-  </body>
+<head>
+	<title>按鈕顯示號碼</title>
+	<script>
+		function generateNumbers() {
+			var numbers = [];
+			var number;
+			for (var i = 0; i < 9; i++) {
+				numbers.push([]);
+				for (var j = 0; j < 3; j++) {
+					do {
+						number = Math.floor(Math.random() * 12) + 1;
+					} while (numbers[i].includes(number));
+					numbers[i].push(number);
+				}
+			}
+			var output = '';
+			for (var i = 0; i < numbers.length; i++) {
+				output += numbers[i].join(', ') + '<br>';
+			}
+			document.getElementById('output').innerHTML = output;
+		}
+	</script>
+</head>
+<body>
+	<button onclick="generateNumbers()">產生號碼</button>
+	<br><br>
+	<div id="output"></div>
+</body>
 </html>
