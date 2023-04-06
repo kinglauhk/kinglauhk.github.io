@@ -1,51 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>最強贏馬號碼</title>
-	<style>
-		button, div {
-			display: block;
-			margin: 10px;
-			padding: 10px;
-			width: 100px;
-		}
-	</style>
-</head>
-<body>
-	<button id="winning-numbers-btn">必贏號碼</button>
-	<div id="winning-numbers"></div>
-
-	<script>
-		var btn = document.getElementById('winning-numbers-btn');
-		var numbersDiv = document.getElementById('winning-numbers');
-
-		function generateNumbers() {
-			var numbers = [];
-
-			for (var i = 1; i <= 9; i++) {
-				var rowNumbers = [];
-				while (rowNumbers.length < 3) {
-					var randomNum = Math.floor(Math.random() * 12) + 1;
-					if (!rowNumbers.includes(randomNum)) {
-						rowNumbers.push(randomNum);
-					}
-				}
-				rowNumbers.sort(function(a, b){return a-b});
-				numbers.push(rowNumbers);
-			}
-
-			var output = '';
-			for (var i = 0; i < numbers.length; i++) {
-				var rowOutput = '第' + (i+1) + '場: ';
-				rowOutput += numbers[i][0] + ', ';
-				rowOutput += numbers[i][1] + ', ';
-				rowOutput += numbers[i][2];
-				output += rowOutput + '<br>';
-			}
-			numbersDiv.innerHTML = output;
-		}
-
-		btn.addEventListener('click', generateNumbers);
-	</script>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>最強贏馬號碼</title>
+    <style>
+      button, p {
+        font-size: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="generateNumbers()">必贏號碼</button>
+    <p id="numbers"></p>
+    <script>
+      function generateNumbers() {
+        var numbers = "";
+        for (var i = 1; i <= 9; i++) {
+          numbers += "第" + i + "場: ";
+          var randomNumbers = [];
+          while (randomNumbers.length < 3) {
+            var random = Math.floor(Math.random() * 12) + 1;
+            if (randomNumbers.indexOf(random) == -1) {
+              randomNumbers.push(random);
+            }
+          }
+          numbers += randomNumbers.join(",") + "<br>";
+        }
+        document.getElementById("numbers").innerHTML = numbers;
+      }
+    </script>
+  </body>
 </html>
