@@ -1,115 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Random Number Generator</title>
-</head>
-<body>
-	<h1>Random Number Generator</h1>
-	<table>
-		<!-- 9 rows -->
-		<tr>
-			<td>
-				<!-- 3 random numbers between 1-12, no duplicates -->
-				<?php
-					$numbers = array();
-
-					while (count($numbers) < 3) {
-						$random_number = rand(1, 12);
-						if (!in_array($random_number, $numbers)) {
-							array_push($numbers, $random_number);
-						}
-					}
-
-					sort($numbers);
-
-					echo implode(", ", $numbers);
-				?>
-			</td>
-			<td>
-				<?php
-					$numbers = array();
-
-					while (count($numbers) < 3) {
-						$random_number = rand(1, 12);
-						if (!in_array($random_number, $numbers)) {
-							array_push($numbers, $random_number);
-						}
-					}
-
-					sort($numbers);
-
-					echo implode(", ", $numbers);
-				?>
-			</td>
-			<td>
-				<?php
-					$numbers = array();
-
-					while (count($numbers) < 3) {
-						$random_number = rand(1, 12);
-						if (!in_array($random_number, $numbers)) {
-							array_push($numbers, $random_number);
-						}
-					}
-
-					sort($numbers);
-
-					echo implode(", ", $numbers);
-				?>
-			</td>
-		</tr>
-		<!-- Repeat for 8 more rows -->
-		<tr>
-			<td>
-				<?php
-					$numbers = array();
-
-					while (count($numbers) < 3) {
-						$random_number = rand(1, 12);
-						if (!in_array($random_number, $numbers)) {
-							array_push($numbers, $random_number);
-						}
-					}
-
-					sort($numbers);
-
-					echo implode(", ", $numbers);
-				?>
-			</td>
-			<td>
-				<?php
-					$numbers = array();
-
-					while (count($numbers) < 3) {
-						$random_number = rand(1, 12);
-						if (!in_array($random_number, $numbers)) {
-							array_push($numbers, $random_number);
-						}
-					}
-
-					sort($numbers);
-
-					echo implode(", ", $numbers);
-				?>
-			</td>
-			<td>
-				<?php
-					$numbers = array();
-
-					while (count($numbers) < 3) {
-						$random_number = rand(1, 12);
-						if (!in_array($random_number, $numbers)) {
-							array_push($numbers, $random_number);
-						}
-					}
-
-					sort($numbers);
-
-					echo implode(", ", $numbers);
-				?>
-			</td>
-		</tr>
-		<!-- Repeat for 7 more rows -->
-	</table>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>隨機數字產生器</title>
+    <script>
+      function generateNumbers() {
+        var numbers = [];
+        var rows = 9;
+        var maxNumber = 12;
+        
+        // 生成數字陣列
+        for (var i = 1; i <= maxNumber; i++) {
+          numbers.push(i);
+        }
+        
+        // 每一行隨機選擇3個數字
+        for (var i = 0; i < rows; i++) {
+          var rowNumbers = [];
+          for (var j = 0; j < 3; j++) {
+            var index = Math.floor(Math.random() * numbers.length);
+            var number = numbers[index];
+            rowNumbers.push(number);
+            numbers.splice(index, 1);
+          }
+          document.getElementById("row" + (i + 1)).innerHTML = rowNumbers.join(", ");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>隨機數字產生器</h1>
+    <button onclick="generateNumbers()">產生數字</button>
+    <table>
+      <tr><td id="row1"></td></tr>
+      <tr><td id="row2"></td></tr>
+      <tr><td id="row3"></td></tr>
+      <tr><td id="row4"></td></tr>
+      <tr><td id="row5"></td></tr>
+      <tr><td id="row6"></td></tr>
+      <tr><td id="row7"></td></tr>
+      <tr><td id="row8"></td></tr>
+      <tr><td id="row9"></td></tr>
+    </table>
+  </body>
 </html>
