@@ -1,38 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
     <title>Check Domain Availability</title>
+    <meta charset="UTF-8">
   </head>
   <body>
     <h1>Check Domain Availability</h1>
-    <form>
-      <label for="domain">Enter Domain Name:</label>
-      <input type="text" id="domain" name="domain">
-      <button type="button" onclick="checkAvailability()">Check</button>
+    <form onsubmit="return checkDomain()">
+      <label for="domain">Enter domain name:</label>
+      <input type="text" id="domain" name="domain" placeholder="example.com">
+      <button type="submit">Check</button>
     </form>
     <div id="result"></div>
     <script>
-      function checkAvailability() {
+      function checkDomain() {
         var domain = document.getElementById("domain").value;
-        var result = document.getElementById("result");
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "https://api.domainsdb.info/v1/domains/search?domain=" + domain);
-        xhr.onload = function() {
-          var data = JSON.parse(xhr.responseText);
-          var available = false;
-          data.domains.forEach(function(domain) {
-            if (domain.domain == domain) {
-              available = true;
-            }
-          });
-          if (available) {
-            result.innerHTML = domain + " is available!";
-          } else {
-            result.innerHTML = domain + " is not available.";
+        var tlds = [".com", ".hk", ".com.hk"];
+        var available = true;
+        tlds.forEach(function(tld) {
+          var url = "https://api.domainsdb.info/v1/domains/search?domain=" + domain + tld;
+          var request = new XMLHttpRequest();
+          request.open("GET", url, false);
+          request.send();
+          var response = JSON.parse(request.responseText);
+          if (response.totalResults == 0) {
+            available = false;
+            document.getElementById("result").innerHTML = "Domain " + domain + tld + " is not available.";
           }
-        };
-        xhr.send();
+        });
+        if (available) {
+          document.getElementById("result").innerHTML = "Domain " + domain + " is available!";
+        }
+        return false;
       }
     </script>
   </body>
