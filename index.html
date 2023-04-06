@@ -1,37 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Check Domain Availability</title>
+    <title>Random Number Generator</title>
     <meta charset="UTF-8">
   </head>
   <body>
-    <h1>Check Domain Availability</h1>
-    <form onsubmit="return checkDomain()">
-      <label for="domain">Enter domain name:</label>
-      <input type="text" id="domain" name="domain" placeholder="example.com">
-      <button type="submit">Check</button>
-    </form>
+    <h1>Random Number Generator</h1>
+    <button onclick="generateNumbers()">Generate Numbers</button>
     <div id="result"></div>
     <script>
-      function checkDomain() {
-        var domain = document.getElementById("domain").value;
-        var tlds = [".com", ".hk", ".com.hk"];
-        var available = true;
-        tlds.forEach(function(tld) {
-          var url = "https://api.domainsdb.info/v1/domains/search?domain=" + domain + tld;
-          var request = new XMLHttpRequest();
-          request.open("GET", url, false);
-          request.send();
-          var response = JSON.parse(request.responseText);
-          if (response.totalResults == 0) {
-            available = false;
-            document.getElementById("result").innerHTML = "Domain " + domain + tld + " is not available.";
+      function generateNumbers() {
+        var numbers = [];
+        while (numbers.length < 6) {
+          var number = Math.floor(Math.random() * 49) + 1;
+          if (!numbers.includes(number)) {
+            numbers.push(number);
           }
-        });
-        if (available) {
-          document.getElementById("result").innerHTML = "Domain " + domain + " is available!";
         }
-        return false;
+        document.getElementById("result").innerHTML = "Random Numbers: " + numbers.join(", ");
       }
     </script>
   </body>
