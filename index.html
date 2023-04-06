@@ -1,7 +1,39 @@
 <!DOCTYPE html>
 <html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Check Domain Availability</title>
+  </head>
+  <body>
+    <h1>Check Domain Availability</h1>
+    <form>
+      <label for="domain">Enter Domain Name:</label>
+      <input type="text" id="domain" name="domain">
+      <button type="button" onclick="checkAvailability()">Check</button>
+    </form>
+    <div id="result"></div>
+    <script>
+      function checkAvailability() {
+        var domain = document.getElementById("domain").value;
+        var result = document.getElementById("result");
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://api.domainsdb.info/v1/domains/search?domain=" + domain);
+        xhr.onload = function() {
+          var data = JSON.parse(xhr.responseText);
+          var available = false;
+          data.domains.forEach(function(domain) {
+            if (domain.domain == domain) {
+              available = true;
+            }
+          });
+          if (available) {
+            result.innerHTML = domain + " is available!";
+          } else {
+            result.innerHTML = domain + " is not available.";
+          }
+        };
+        xhr.send();
+      }
+    </script>
+  </body>
 </html>
