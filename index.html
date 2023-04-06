@@ -1,52 +1,115 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Random Numbers</title>
-    <style>
-      table {
-        border-collapse: collapse;
-        margin: auto;
-      }
-      td {
-        border: 1px solid black;
-        padding: 10px;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <table>
-      <tbody id="numbers-table">
-      </tbody>
-    </table>
-    <script>
-      function getRandomNumbers() {
-        var numbers = [];
-        while (numbers.length < 3) {
-          var n = Math.floor(Math.random() * 12) + 1;
-          if (numbers.indexOf(n) == -1) {
-            numbers.push(n);
-          }
-        }
-        return numbers;
-      }
+<head>
+	<title>Random Number Generator</title>
+</head>
+<body>
+	<h1>Random Number Generator</h1>
+	<table>
+		<!-- 9 rows -->
+		<tr>
+			<td>
+				<!-- 3 random numbers between 1-12, no duplicates -->
+				<?php
+					$numbers = array();
 
-      function generateNumbersTable() {
-        var table = document.getElementById("numbers-table");
-        for (var i = 1; i <= 9; i++) {
-          var row = document.createElement("tr");
-          for (var j = 0; j < 3; j++) {
-            var cell = document.createElement("td");
-            var numbers = getRandomNumbers();
-            cell.textContent = numbers.join(", ");
-            row.appendChild(cell);
-          }
-          table.appendChild(row);
-        }
-      }
+					while (count($numbers) < 3) {
+						$random_number = rand(1, 12);
+						if (!in_array($random_number, $numbers)) {
+							array_push($numbers, $random_number);
+						}
+					}
 
-      window.onload = generateNumbersTable;
-    </script>
-  </body>
+					sort($numbers);
+
+					echo implode(", ", $numbers);
+				?>
+			</td>
+			<td>
+				<?php
+					$numbers = array();
+
+					while (count($numbers) < 3) {
+						$random_number = rand(1, 12);
+						if (!in_array($random_number, $numbers)) {
+							array_push($numbers, $random_number);
+						}
+					}
+
+					sort($numbers);
+
+					echo implode(", ", $numbers);
+				?>
+			</td>
+			<td>
+				<?php
+					$numbers = array();
+
+					while (count($numbers) < 3) {
+						$random_number = rand(1, 12);
+						if (!in_array($random_number, $numbers)) {
+							array_push($numbers, $random_number);
+						}
+					}
+
+					sort($numbers);
+
+					echo implode(", ", $numbers);
+				?>
+			</td>
+		</tr>
+		<!-- Repeat for 8 more rows -->
+		<tr>
+			<td>
+				<?php
+					$numbers = array();
+
+					while (count($numbers) < 3) {
+						$random_number = rand(1, 12);
+						if (!in_array($random_number, $numbers)) {
+							array_push($numbers, $random_number);
+						}
+					}
+
+					sort($numbers);
+
+					echo implode(", ", $numbers);
+				?>
+			</td>
+			<td>
+				<?php
+					$numbers = array();
+
+					while (count($numbers) < 3) {
+						$random_number = rand(1, 12);
+						if (!in_array($random_number, $numbers)) {
+							array_push($numbers, $random_number);
+						}
+					}
+
+					sort($numbers);
+
+					echo implode(", ", $numbers);
+				?>
+			</td>
+			<td>
+				<?php
+					$numbers = array();
+
+					while (count($numbers) < 3) {
+						$random_number = rand(1, 12);
+						if (!in_array($random_number, $numbers)) {
+							array_push($numbers, $random_number);
+						}
+					}
+
+					sort($numbers);
+
+					echo implode(", ", $numbers);
+				?>
+			</td>
+		</tr>
+		<!-- Repeat for 7 more rows -->
+	</table>
+</body>
 </html>
